@@ -1,0 +1,90 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+# TODO: Write Dcocumentation e.g. Project Test scenario. CRUD Operation: Create, Read, Update, Delete
+
+Documentation	Testing the creation of a blank project, creation of a template project, updating the name of the 
+		template project and deleting a template project. Testing creation of a blank project with a used
+		name.
+
+# TODO: Write Precondition, Postcondition, Tags
+
+Pre Condition	Open Browser, Login, Navigate To Projects
+Post Condition	Deleting Created Projects, Close All Browsers
+Tags	Create Project, Update Project, Delete Project, Negative Test, CRUD Operations
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Project creation field variables
+
+ProjectsUrl= https://gitlab.com/projects/
+BlankProjectName= TestProject1
+Used_ProjectName= TestProject2
+TemplateProjectName= TemplateProject3
+UpdatedTemplateProjectName= UpdatedTemplateProject3
+
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive and Negative Test Cases and Test Process steps
+
+# Positive Test examples are below write test process steps for each below test case
+
+	Create blank project
+	Create template project 
+	Update name of template project
+	Delete template project
+	Valide that message is showing Project 'First project' was successfully created.
+
+Create A Blank Project Succesfully
+    Navigate To Project Creation  ProjectsUrl
+    Input Project Name  BlankProjectName
+    Submit Project Creation
+    Verify That A Message Displays "Project succesfully created"
+    Verify That The Project Appears In The Projects List
+
+Create A Blank Template Project Succesfully
+    Navigate To Project Creation  ProjectsUrl
+    Input Template Project Name  TemplateProjectName
+    Submit Template Project Creation
+    Verify That A Message Displays "Template project succesfully created"
+    Verify That The Template Project Appears In The Template Projects List
+
+Update A Name Of A Blank Template Project Succesfully
+    Navigate To Projects List  ProjectsUrl
+    Select To Edit Template Project Name  TemplateProjectName
+    Input Updated Template Project Name  UpdatedTemplateProjectName
+    Submit Template Project Name Update
+    Verify That A Message Displays "Template project name updated"
+    Verify That The Updated Template Project Appears In The Template Projects List
+
+Delete A Template Project Succesfully
+    Navigate To Projects List  ProjectsUrl
+    Select To Delete Template Project  TemplateProjectName
+    Confirm To Delete Template Project  TemplateProjectName
+    Submit Template Project Deleting
+    Verify That A Confirmation Message For Deleting The Project Appears 
+    Verify That A Message Displays "Template project has been deleted"
+    Verify That The Template Project Is Removed From The Template Projects List
+
+Validate A Succesful Project Creation
+    Verify That A Message Displays "Project 'First project' was succesfully created"
+
+# Negative Test examples are below write test process steps for each below test case
+
+	Create a blank project with the previous same name
+
+Error Message Should Be Visible After Attempt To Create A Project With Same Name
+    Navigate To Project Creation  ProjectsUrl
+    Input Project Name  Used_ProjectName
+    Submit Project Creation
+    Verify That Error Message Contains "Project name already in use"
+    Verify That Message Requests Another Name

@@ -1,0 +1,74 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+Documentation	Issue Test scenario. CRUD Operation: Create, Read, Update, Delete
+
+# TODO: Write Precondition and Postcondition, Tags 
+
+Pre Condition	Open Browser, Login, Navigate To Projects, Create Project 
+Post Condition	Deleting Created Issues, Close All Browsers
+Tags	Create Issue, Update Issue, Delete Issue, CRUD Operations
+
+#******************* Common Variables ********************
+
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Issue creation field variables, Updated name of the issue
+
+IssuesUrl= https://gitlab.com/testing3290248/project1/-/issues
+FirstIssueName= IssueOne
+UpdatedIssueName= UpdatedIssueOne
+SecondIssueName= UpdatedIssueOne
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive Test Cases and Test Process steps
+
+# Positive Test examples are below write test process steps for each below test case
+
+	Create issue,
+ 	Update name of issue, 
+	Create second issue with privious updated name
+    Delete first issue
+
+Create A New Issue
+    Navigate To Issues Page  IssuesUrl
+    Select To Add New Issue
+    Input Name For New Issue  IssueOne
+    Create New Issue
+    Verify That A Message Displays "A new issue created"
+    Verify That Created Issue Is Added Under Projects Issue
+    Verify That Created Issue Is Found In The Issues Page With Name "IssueOne"
+
+Update The Name Of The Issue
+    Navigate To Issues Page  IssuesUrl
+    Select To Update An Issue
+    Edit And Update Name Of Issue  UpdatedIssueOne
+    Confirm And Save Changes
+    Verify That A Message Displays "Issue name updated"
+    Verify That The Name Of The Issue Has Been Updated
+    Verify That Updated Issue Is Found In The Issues Page With Updated Name
+
+Create A Second Issue With The Updated Issue Name
+    Navigate To Issues Page  IssuesUrl
+    Select To Add New Issue
+    Input Updated Name For New Issue  IssueOneUpdated
+    Create New Issue
+    Verify That A Message Displays "A new issue created"
+    Verify That Created Issue Is Added Under Projects Issue
+    Verify That Created Issue Is Found In The Issues Page With Name "UpdatedIssueOne"
+
+Delete The First Issue Created
+    Navigate To Issues Page  IssuesUrl
+    Select The First Issue Created  IssueOne
+    Select Delete The Issue
+    Confirm Deleting Of Issue
+    Verify That A Confirmation Message For Deleting The Issue Appears
+    Verify That A Message Displays "Issued deleted"
+    Verify That Deleted Issue Is Removed From Issues List
